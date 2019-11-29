@@ -39,7 +39,7 @@ import java.util.Locale;
 
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 
-public class WeatherActivity extends AppCompatActivity
+public class WeatherActivity extends AppCompatActivity implements SensorEventListener
 {
     private static final String OPEN_WEATHER_MAP_API_KEY = "18fa3e68a532b2961bd8dd0afe720a9c";
     TextView txtView;
@@ -69,7 +69,6 @@ public class WeatherActivity extends AppCompatActivity
                 lat, lon, units, OPEN_WEATHER_MAP_API_KEY);
         new GetWeatherTask().execute(url);
     }
-
 
 
     private class GetWeatherTask extends AsyncTask<String, Void, String>
@@ -131,10 +130,70 @@ public class WeatherActivity extends AppCompatActivity
         {
             String[] tempA = temp.split("\t");
             if(tempA.length > 1){
-                txtView.setText("Current Temperature : " + tempA[0] + "Current Pressure : " + tempA[1] + "Current Humidity : " + tempA[2] + "Current Speed : " + tempA[3] + "Current Deg : " + tempA[4] + "Current Gust : ");
+                txtView.setText("Current Temperature : " + tempA[0] + "Current Pressure : " + tempA[1] + "Current Humidity : "
+                        + tempA[2]);
+                txtView.setText("Current Speed : " + tempA[3] + " Current Deg : " + tempA[4] );
             }
 
         }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event)
+    {
+        if (event.sensor.getType() == TYPE_ACCELEROMETER)
+        {
+            getAccelerometer(event);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy)
+    {
+
+    }
+
+    protected void onPause()
+    {
+        super.onPause();
+        sensorManager.unregisterListener((SensorEventListener) this);
+    }
+
+    private void getAccelerometer(SensorEvent event)
+    {
+        float[] values = event.values;
+        // Movement
+        float x = values[0];
+        float y = values[1];
+        float z = values[2];
+
+        float gX = x / SensorManager.GRAVITY_EARTH;
+        float gY = x / SensorManager.GRAVITY_EARTH;
+        float gZ = x / SensorManager.GRAVITY_EARTH;
+
+        float gForce = (float) Math.sqrt(gX * gX + gY * gY + gZ * gZ);
+        long currentTime = System.currentTimeMillis();
+        if (gForce >= SHAKE_THRESHOLD_GRAVITY)
+        {
+            if (currentTime - lastUpdateTime < 200)
+            {
+                return;
+            }
+            lastUpdateTime = currentTime;
+            Toast.makeText(this, "Device was shaken", Toast.LENGTH_SHORT).show();
+            loadFoodHygiene();
+        }
+    }
+
+    public void loadFoodHygiene()
+    {
+        Intent intent = new Intent(WeatherActivity.this, FoodHygieneActivity.class);
+        startActivity(intent);
+    }
+
+    public void LogOut(View view)
+    {
+        startActivity(new Intent(WeatherActivity.this, MainActivity.class));
     }
 
 }
