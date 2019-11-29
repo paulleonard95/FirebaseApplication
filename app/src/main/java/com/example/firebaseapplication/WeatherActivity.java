@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +33,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
@@ -67,12 +70,20 @@ public class WeatherActivity extends AppCompatActivity
         new GetWeatherTask().execute(url);
     }
 
+
+
     private class GetWeatherTask extends AsyncTask<String, Void, String>
     {
+        String temp ="";
         @Override
         protected String doInBackground(String... strings)
         {
             String weather = "UNDEFINED";
+            String pressure ="UNDEFINED";
+            String humidity = "UNDEFINED";
+            String wind_spedd = "UNDEFINED";
+            List<String> weather_list = new ArrayList<>();
+            String listString="";
             try
             {
                 URL url = new URL(strings[0]);
@@ -90,7 +101,19 @@ public class WeatherActivity extends AppCompatActivity
 
                 JSONObject topLevel = new JSONObject(builder.toString());
                 JSONObject main = topLevel.getJSONObject("main");
-                weather = String.valueOf(main.getDouble("temp"));
+                weather_list.add(String.valueOf(main.getDouble("temp")));
+                weather_list.add(String.valueOf(main.getInt("pressure")));
+                weather_list.add(String.valueOf(main.getInt("humidity")));
+
+                JSONObject wind = topLevel.optJSONObject("wind");
+                weather_list.add(String.valueOf(wind.getDouble("speed")));
+                weather_list.add(String.valueOf(wind.getDouble("deg")));
+                //weather_list.add(String.valueOf(wind.getDouble("gust")));
+
+                for(String s : weather_list)
+                {
+                    listString += s + "\t";
+                }
 
                 urlConnection.disconnect();
             }
@@ -98,13 +121,18 @@ public class WeatherActivity extends AppCompatActivity
             {
                 e.printStackTrace();
             }
-            return weather;
+            temp = listString;
+            return listString;
         }
 
         @Override
-        protected void onPostExecute(String temp)
+        protected void onPostExecute(String weather_list)
         {
-            txtView.setText("Current Temperature : " + temp);
+            String[] tempA = temp.split("\t");
+            if(tempA.length > 1){
+                txtView.setText("Current Temperature : " + tempA[0] + "Current Pressure : " + tempA[1] + "Current Humidity : " + tempA[2] + "Current Speed : " + tempA[3] + "Current Deg : " + tempA[4] + "Current Gust : ");
+            }
+
         }
     }
 
