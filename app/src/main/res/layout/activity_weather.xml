@@ -9,6 +9,25 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_log_out"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/mybutton"
+            android:onClick="LogOut"
+            android:text="@string/log_out"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/TextView_weather_logo_register"
         android:layout_width="100dp"
@@ -52,5 +71,8 @@
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_marginTop="30dp"/>
+
+
+
 
 </LinearLayout>
