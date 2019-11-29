@@ -180,7 +180,7 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
                 return;
             }
             lastUpdateTime = currentTime;
-            Toast.makeText(this, "Device was shaken", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Device shaken", Toast.LENGTH_SHORT).show();
             loadFoodHygiene();
         }
     }
