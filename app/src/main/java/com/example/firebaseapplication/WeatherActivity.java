@@ -108,6 +108,7 @@ public class WeatherActivity extends AppCompatActivity
                 JSONObject wind = topLevel.optJSONObject("wind");
                 weather_list.add(String.valueOf(wind.getDouble("speed")));
                 weather_list.add(String.valueOf(wind.getDouble("deg")));
+                //code test
                 //weather_list.add(String.valueOf(wind.getDouble("gust")));
 
                 for(String s : weather_list)
