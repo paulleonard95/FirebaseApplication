@@ -43,6 +43,8 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
 {
     private static final String OPEN_WEATHER_MAP_API_KEY = "18fa3e68a532b2961bd8dd0afe720a9c";
     TextView txtView;
+    TextView txtView_temp;
+    TextView textView_city, txtView_humidity, txtView_pressure, txtView_wind;
 
     String city;
     LocationManager locationManager;
@@ -60,7 +62,10 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
         setContentView(R.layout.activity_weather);
 
         txtView = (TextView) findViewById(R.id.TextView);
-        double lat = 40.712774, lon = -74.006091;
+  //     txtView_humidity = (TextView) findViewById(R.id.textView_display_humidity);
+//        txtView_pressure = (TextView) findViewById(R.id.textView_display_pressure);
+//        txtView_wind = (TextView) findViewById(R.id.textView_display_wind);
+        double lat = 54.995800, lon = -7.307400;
         String main = "";
         String humidity = "humidity";
         String units = "metric";
@@ -80,7 +85,8 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
             String weather = "UNDEFINED";
             String pressure ="UNDEFINED";
             String humidity = "UNDEFINED";
-            String wind_spedd = "UNDEFINED";
+            String wind_speed = "UNDEFINED";
+            String city = "UNDEFINED";
             List<String> weather_list = new ArrayList<>();
             String listString="";
             try
@@ -107,8 +113,6 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
                 JSONObject wind = topLevel.optJSONObject("wind");
                 weather_list.add(String.valueOf(wind.getDouble("speed")));
                 weather_list.add(String.valueOf(wind.getDouble("deg")));
-                //code test
-                //weather_list.add(String.valueOf(wind.getDouble("gust")));
 
                 for(String s : weather_list)
                 {
@@ -130,9 +134,14 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
         {
             String[] tempA = temp.split("\t");
             if(tempA.length > 1){
-                txtView.setText("Current Temperature : " + tempA[0] + "Current Pressure : " + tempA[1] + "Current Humidity : "
-                        + tempA[2]);
-                txtView.setText("Current Speed : " + tempA[3] + " Current Deg : " + tempA[4] );
+                //txtView.setText("Current Temperature : " + tempA[0] + "Current Pressure : " + tempA[1] + "Current Humidity : "
+                       // + tempA[2]);
+                //textView_city.setText("Current City: " + tempA[6]);
+                //txtView_temp.setText(tempA[0] + "Celsius");
+                txtView.setText("Temperature : " + tempA[0] + " Celsius                                      " + "Pressure : " + tempA[1] + "mb             " + "Humidity : "
+                       + tempA[2] + "%            ");
+                //txtView_humidity.setText("Test" );
+
             }
 
         }
@@ -187,8 +196,7 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
 
     public void loadFoodHygiene()
     {
-        Intent intent = new Intent(WeatherActivity.this, FoodHygieneActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(WeatherActivity.this, FoodHygieneActivity.class));
     }
 
     public void LogOut(View view)
