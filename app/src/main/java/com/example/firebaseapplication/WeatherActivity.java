@@ -45,8 +45,10 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
     TextView txtView;
     TextView txtView_temp;
     TextView textView_city, txtView_humidity, txtView_pressure, txtView_wind;
+    String[] cityArr = {"Derry, GB" , "London, GB", "Belfast, GB", "Dublin, IE", "Cork, IE", "Glasgow, IE", "Cardiff, GB" };
 
-    String city;
+
+    String city, name;
     LocationManager locationManager;
     TextView locationText;
 
@@ -81,6 +83,13 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
                 sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
         lastUpdateTime = System.currentTimeMillis();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, cityArr);
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autoCompleteSearchCity);
+
+        textView.setThreshold(3);
+        textView.setAdapter(adapter);
     }
 
 
@@ -206,10 +215,37 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
     {
         startActivity(new Intent(WeatherActivity.this, FoodHygieneActivity.class));
     }
+    public void loadSearch(View view)
+    {
+        startActivity(new Intent(WeatherActivity.this, LocationActivity.class));
+    }
 
     public void LogOut(View view)
     {
         startActivity(new Intent(WeatherActivity.this, MainActivity.class));
+    }
+
+    public void searchByCity(View view) {
+
+        //Intent intent = new Intent(LoginSuccessActivity.this, WeatherSearchActivity.class);
+        //startActivity(intent);
+
+        Log.d("Search by City", "Search by City");
+
+        try {
+            String city = ((EditText) findViewById(R.id.autoCompleteSearchCity)).getText().toString();
+
+            Intent intent = new Intent(WeatherActivity.this, LocationActivity.class);
+            intent.putExtra("City", city);
+            intent.putExtra("Name", name);
+            Log.d("Search by City", "Search by City : " + city);
+            startActivity(intent);
+
+        } catch (Exception e) {
+            Log.d("Search", "Unable to Search by City");
+
+        }
+
     }
 
 }
