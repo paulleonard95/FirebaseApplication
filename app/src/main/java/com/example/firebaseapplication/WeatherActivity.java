@@ -54,6 +54,7 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
     private Sensor sensor;
     private static float SHAKE_THRESHOLD_GRAVITY = 2;
     private long lastUpdateTime;
+    private boolean switching = false;
 
 
     @Override
@@ -73,6 +74,13 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
                 "http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&units=%s&appid=%s",
                 lat, lon, units, OPEN_WEATHER_MAP_API_KEY);
         new GetWeatherTask().execute(url);
+
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager.registerListener(this,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        lastUpdateTime = System.currentTimeMillis();
     }
 
 
@@ -177,8 +185,8 @@ public class WeatherActivity extends AppCompatActivity implements SensorEventLis
         float z = values[2];
 
         float gX = x / SensorManager.GRAVITY_EARTH;
-        float gY = x / SensorManager.GRAVITY_EARTH;
-        float gZ = x / SensorManager.GRAVITY_EARTH;
+        float gY = y / SensorManager.GRAVITY_EARTH;
+        float gZ = z / SensorManager.GRAVITY_EARTH;
 
         float gForce = (float) Math.sqrt(gX * gX + gY * gY + gZ * gZ);
         long currentTime = System.currentTimeMillis();
