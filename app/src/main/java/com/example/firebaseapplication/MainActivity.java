@@ -67,4 +67,9 @@ public class MainActivity extends AppCompatActivity {
     {
         startActivity(new Intent(MainActivity.this, RegisterActivity.class));
     }
+
+    public void forgottenPassword(View view)
+    {
+        startActivity(new Intent(MainActivity.this, ForgottenPassword.class));
+    }
 }

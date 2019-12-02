@@ -84,6 +84,7 @@
         android:layout_height="43dp"
         android:paddingLeft="10dp"
         android:text="Reset Password"
+        android:onClick="forgottenPassword"
         android:textColor="#fdd036"
         android:textStyle="bold" />
 

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.firebaseapplication">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FoodHygieneActivity"></activity>
+        <activity android:name=".ForgottenPassword"></activity>
+        <activity android:name=".FoodHygieneActivity" />
         <activity android:name=".LocationActivity" />
         <activity android:name=".WeatherActivity" />
         <activity android:name=".RegisterActivity" />
@@ -24,5 +23,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
