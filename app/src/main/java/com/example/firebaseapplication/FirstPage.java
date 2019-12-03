@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class FirstPage extends AppCompatActivity
 {
 
-    String[] cityArr = {"Derry, GB" , "London, GB", "Belfast, GB", "Dublin, IE", "Cork, IE", "Glasgow, IE", "Cardiff, GB" };
+    String[] cityArr = {"Derry, NI" , "Belfast, NI","Dublin, IE", "Galway, IE", "Donegal, IE", "London, GB", "Glasgow, GB"};
     String name;
 
     @Override
@@ -27,9 +27,9 @@ public class FirstPage extends AppCompatActivity
 
         Intent intent = getIntent();
 
-        String loginName = intent.getStringExtra("Name");
-        txtname.setText("Welcome, " + loginName);
-        name = loginName;
+//        String loginName = intent.getStringExtra("Name");
+//        txtname.setText("Welcome, " + loginName);
+//        name = loginName;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, cityArr);

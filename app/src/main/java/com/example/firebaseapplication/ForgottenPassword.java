@@ -58,7 +58,7 @@ public class ForgottenPassword extends AppCompatActivity
                             }
                             else
                                 {
-                                Toast.makeText(ForgottenPassword.this, "Error! Unable to send Reset Email.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ForgottenPassword.this, "Error! Please check email address entered and try again.", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
