@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,18 +39,38 @@ public class RegisterActivity extends AppCompatActivity
     public void registerUser(View view)
     {
         //getting email and password from edit texts
+        String first_name = ((EditText) findViewById(R.id.editText_First_Name)).getText().toString();
+        String last_name = ((EditText) findViewById(R.id.editText_Last_Name)).getText().toString();
         String email = ((EditText) findViewById(R.id.editText_UserEmail)).getText().toString();
         String password = ((EditText) findViewById(R.id.editText_Password)).getText().toString();
+        String cnf_password = ((EditText) findViewById(R.id.editText_Cnf_Password)).getText().toString();
+        String female_btn = ((RadioButton) findViewById(R.id.btn_female)).getText().toString();
+        String male_btn = ((RadioButton) findViewById(R.id.btn_male)).getText().toString();
 
         //checking if email and password are empty
+        if (TextUtils.isEmpty(first_name) || TextUtils.isEmpty(last_name))
+        {
+            Toast.makeText(this, "Please enter first & last name", Toast.LENGTH_LONG).show();
+            return;
+        }
         if (TextUtils.isEmpty(email))
         {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(password))
+        if (TextUtils.isEmpty(password) || TextUtils.isEmpty(cnf_password))
         {
             Toast.makeText(this, "Please enter Password", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!password.equals(cnf_password))
+        {
+            Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (password.length() < 5 )
+        {
+            Toast.makeText(getApplicationContext(), "Password is too easy", Toast.LENGTH_LONG).show();
             return;
         }
         //if the email and password are not empty, displaying a progress bar

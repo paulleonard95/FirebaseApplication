@@ -167,24 +167,24 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
 
         public void onPostExecute(String response) {
 
-            TextView cityField = (TextView) findViewById(R.id.textView_city);
-            TextView tempField = (TextView) findViewById(R.id.textView_temperature);
-            TextView descField = (TextView) findViewById(R.id.textView_description);
-            TextView humidityField = (TextView) findViewById(R.id.textView_humidity);
-            TextView pressureField = (TextView) findViewById(R.id.textView_pressure);
-            TextView windField = (TextView) findViewById(R.id.textView_wind);
+            TextView city = (TextView) findViewById(R.id.textView_city);
+            TextView temp = (TextView) findViewById(R.id.textView_temperature);
+            TextView humidity = (TextView) findViewById(R.id.textView_humidity);
+            TextView pressure = (TextView) findViewById(R.id.textView_pressure);
+            TextView wind = (TextView) findViewById(R.id.textView_wind);
+            TextView description_ = (TextView) findViewById(R.id.textView_description);
 
             try {
                 JSONObject json = new JSONObject(response);
                 if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
-                    cityField.setText(json.getString("name").toUpperCase(Locale.ENGLISH) + ", " + json.getJSONObject("sys").getString("country"));
-                    tempField.setText(String.format("%.0f", main.getDouble("temp")) + "°");
-                    humidityField.setText(String.format("%.0f", main.getDouble("humidity")) + "%");
-                    pressureField.setText(String.format("%.0f", main.getDouble("pressure")) + "mb");
+                    city.setText(json.getString("name").toUpperCase(Locale.ENGLISH) + ", " + json.getJSONObject("sys").getString("country"));
+                    temp.setText(String.format("%.0f", main.getDouble("temp")) + "°");
+                    humidity.setText(String.format("%.0f", main.getDouble("humidity")) + "%");
+                    pressure.setText(String.format("%.0f", main.getDouble("pressure")) + "mb");
                     String description = details.getString("description").toUpperCase(Locale.ENGLISH);
-                    descField.setText(description);
+                    description_.setText(description);
                 }
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "Error, Occurred", Toast.LENGTH_SHORT).show();
