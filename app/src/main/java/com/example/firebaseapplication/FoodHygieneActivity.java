@@ -117,7 +117,7 @@ public class FoodHygieneActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getBaseContext(), response.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), response.toString(), Toast.LENGTH_LONG).show();
                 // here you can get the restaurants and rating details
                 try {
                     JSONArray jsonArray = response.getJSONArray("establishments");
