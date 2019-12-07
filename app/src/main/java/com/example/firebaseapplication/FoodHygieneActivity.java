@@ -110,7 +110,16 @@ public class FoodHygieneActivity extends AppCompatActivity {
 
     private void jsonParse() {
 
-        final String url = "http://api.ratings.food.gov.uk/Establishments/basic";
+        final String url = "http://api.ratings.food.gov.uk/Establishments?longitude=-7.323717&latitude=55.00669";
+
+        /*
+
+        <input type="hidden" class="ResultsLongitude" value="-7.323717" />
+        <input type="hidden" class="ResultsLatitude" value="55.00669" />
+        GET Establishments?longitude={-7.323717}&latitude={55.00669}&maxDistanceLimit={}
+        Establishments?longitude={-7.323717}&latitude={55.00669}
+
+         */
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONObject>() {
@@ -121,6 +130,7 @@ public class FoodHygieneActivity extends AppCompatActivity {
                 // here you can get the restaurants and rating details
                 try {
                     JSONArray jsonArray = response.getJSONArray("establishments");
+                    System.out.println(response);
 
                     for (int i =0; i < jsonArray.length(); i++)
                     {
@@ -163,6 +173,7 @@ public class FoodHygieneActivity extends AppCompatActivity {
     public void LogOut(View view) {
         startActivity(new Intent(FoodHygieneActivity.this, MainActivity.class));
     }
+
 
 
 
