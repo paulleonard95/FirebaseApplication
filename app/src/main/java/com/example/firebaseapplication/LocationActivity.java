@@ -174,7 +174,8 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
             TextView max_temp = (TextView) findViewById(R.id.textView_max_temp);
             TextView humidity = (TextView) findViewById(R.id.textView_humidity);
             TextView pressure = (TextView) findViewById(R.id.textView_pressure);
-            TextView wind = (TextView) findViewById(R.id.textView_wind);
+            TextView wind_speed = (TextView) findViewById(R.id.textView_wind_speed);
+            TextView wind_degress = (TextView) findViewById(R.id.textView_wind_degrees);
             TextView description_ = (TextView) findViewById(R.id.textView_description);
 
             try {
@@ -191,6 +192,9 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
                     pressure.setText(String.format("%.0f", main.getDouble("pressure")) + "mb");
                     String description = details.getString("description").toUpperCase(Locale.ENGLISH);
                     description_.setText(description);
+                    JSONObject wind_ = json.getJSONObject("wind");
+                    wind_speed.setText(String.format("%.0f", wind_.getDouble("speed")) + "mph");
+                    wind_degress.setText(String.format("%.0f", wind_.getDouble("deg") ) + "");
                     weatherIcon(description);
                 }
             } catch (JSONException e) {
