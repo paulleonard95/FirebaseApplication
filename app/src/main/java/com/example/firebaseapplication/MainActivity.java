@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             Toast.makeText(MainActivity.this, "Login Successful",
                                     Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(), FoodHygieneActivity.class));
+                            startActivity(new Intent(getApplicationContext(), FirstPage.class));
                             finish();
                         }
                         else

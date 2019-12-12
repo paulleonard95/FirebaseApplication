@@ -185,9 +185,79 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
                     pressure.setText(String.format("%.0f", main.getDouble("pressure")) + "mb");
                     String description = details.getString("description").toUpperCase(Locale.ENGLISH);
                     description_.setText(description);
+                    weatherIcon(description);
                 }
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "Error, Occurred", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void weatherIcon(String description)
+    {
+        //array with weather descriptions
+        String[] commonWeatherDescription = {"clear sky", "few clouds", "scattered clouds", "broken clouds", "shower rain",
+                "rain", "thunderstorm", "snow", "mist"};
+
+        int[] weatherIcon = {R.drawable.clear_day, R.drawable.cloudy, R.drawable.scattered_clouds, R.drawable.broken_clouds,
+                                R.drawable.rain, R.drawable.shower_rain, R.drawable.thunderstorm_storm, R.drawable.snow, R.drawable.mist};
+
+        //Extended List of weather descriptions if not found in common
+        String[] Atmosphere =  {"mist", "smoke haze", "sand", "dust", "whirls", "fog", "sand", "dust", "volcanic ash", "squalls", "tornado"};
+        String[] Clouds = {"few clouds", "scattered clouds" , "broken clouds", "overcast clouds" };
+        String[] Snow = {"light snow", "snow", "heavy snow", "sleet", "shower sleet", "light rain and snow", "rain and snow", "light shower snow", "shower snow", "heavy shower snow"};
+        String[] Rain = {"light rain", "moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "light intensity shower rain", "shower rain", "heavy intensity shower rain", "ragged shower rain"};
+        String[] Drizzle = {"light intensity drizzle", "drizzle", "heavy intensity drizzle", "light intensity drizzle rain", "drizzle rain", "heavy intensity drizzle rain", "shower rain and drizzle", "heavy shower rain and drizzle", "shower drizzle"};
+        String[] Thunder = {"thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "thunderstorm", "heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle"};
+
+        ImageView iv = (ImageView)findViewById(R.id.imageView_Icon);
+
+        Log.d("PRINT DESC|", description);
+        description.toLowerCase(Locale.ENGLISH);
+
+        for(int i = 0; i < commonWeatherDescription.length ;i++)
+        {
+            if(description.toLowerCase().contains(commonWeatherDescription[i]))
+                iv.setImageResource(weatherIcon[i]);
+
+
+            else{
+                for(i = 0; i < Atmosphere.length; i++){
+                    if(description.toLowerCase().contains(Atmosphere[i])) {
+                        iv.setImageResource(R.drawable.mist);
+                        break;
+                    }
+                }
+                for(i = 0; i < Clouds.length; i++){
+                    if(description.toLowerCase().contains(Clouds[i])){
+                        iv.setImageResource(R.drawable.cloudy);
+                        break;
+                    }
+                }
+                for(i = 0; i< Snow.length; i++){
+                    if(description.toLowerCase().contains(Snow[i])){
+                        iv.setImageResource(R.drawable.snow);
+                        break;
+                    }
+                }
+                for(i = 0; i< Rain.length; i++){
+                    if(description.toLowerCase().contains(Rain[i])){
+                        iv.setImageResource(R.drawable.rain);
+                        break;
+                    }
+                }
+                for(i = 0; i< Drizzle.length; i++){
+                    if(description.toLowerCase().contains(Drizzle[i])){
+                        iv.setImageResource(R.drawable.shower_rain);
+                        break;
+                    }
+                }
+                for(i = 0; i< Thunder.length; i++){
+                    if(description.toLowerCase().contains(Thunder[i])){
+                        iv.setImageResource(R.drawable.thunderstorm_storm);
+                        break;
+                    }
+                }
             }
         }
     }

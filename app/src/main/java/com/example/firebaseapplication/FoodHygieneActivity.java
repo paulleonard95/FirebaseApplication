@@ -110,7 +110,7 @@ public class FoodHygieneActivity extends AppCompatActivity {
 
     private void jsonParse() {
 
-        final String url = "http://api.ratings.food.gov.uk/Establishments?longitude=-7.323717&latitude=55.00669";
+        final String url = "http://api.ratings.food.gov.uk/Establishments?longitude=-7.323717&latitude=55.00669&distancelimit=1&businesstypeid=1";
 
         /*
 
