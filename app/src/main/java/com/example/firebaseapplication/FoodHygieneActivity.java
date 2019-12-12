@@ -139,7 +139,7 @@ public class FoodHygieneActivity extends AppCompatActivity {
                         String businessName = estab.getString("BusinessName");
                         String businessValue = estab.getString("RatingValue");
 
-                        textView.append(businessName + ", " + businessValue + "\n\n");
+                        textView.append("Restaurant Name: " + businessName + "\n " + "Food Hygiene Rating: " +businessValue + "\n\n");
                     }
 //                                String businessValue = establishment.getString("RatingValue");
                 } catch (JSONException e) {

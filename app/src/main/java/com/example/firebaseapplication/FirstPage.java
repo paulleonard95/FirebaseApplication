@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class FirstPage extends AppCompatActivity
 {
 
-    String[] cityArr = {"Derry, NI" , "Belfast, NI","Dublin, IE", "Galway, IE", "Donegal, IE", "London, GB", "Glasgow, GB"};
+    String[] cityArr = {"Derry, GB" , "Belfast, GB","Dublin, IE", "Galway, IE", "Donegal, IE", "London, GB", "Glasgow, GB"};
     String name;
 
     @Override
