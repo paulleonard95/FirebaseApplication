@@ -51,7 +51,8 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
     private long lastUpdateTime;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
@@ -109,13 +110,15 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
     }
 
 
-    public void logOutOK(View view) {
+    public void logOutOK(View view)
+    {
         Intent intent = new Intent(LocationActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public static String Conn(String targetURL) {
+    public static String Conn(String targetURL)
+    {
         URL url;
         HttpURLConnection connection = null;
         try {
@@ -153,7 +156,8 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
         }
         return "0";
     }
-    private class GetWeather extends AsyncTask<String, Void, String> {
+    private class GetWeather extends AsyncTask<String, Void, String>
+    {
 
 
         @Override
@@ -271,31 +275,36 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
             }
         }
     }
-    public void onSensorChanged(SensorEvent event) {
+    public void onSensorChanged(SensorEvent event)
+    {
         if (event.sensor.getType() == TYPE_ACCELEROMETER) {
             getAccelerometer(event);
         }
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onAccuracyChanged(Sensor sensor, int accuracy)
+    {
 
     }
 
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
         sensorManager.registerListener((SensorEventListener) this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
 
         sensorManager.unregisterListener((SensorEventListener) this);
     }
 
-    private void getAccelerometer(SensorEvent event) {
+    private void getAccelerometer(SensorEvent event)
+    {
         float[] values = event.values;
         // Movement
         float x = values[0];
