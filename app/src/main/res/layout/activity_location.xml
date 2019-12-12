@@ -91,9 +91,96 @@
             />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout9"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="0dp">
+
+
+        <TextView
+            android:id="@+id/textView_feels_like_text"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:text="Feels Like"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#fdd036"
+            />
+
+        <TextView
+            android:id="@+id/textView_feels_like"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout6"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="0dp">
+
+
+        <TextView
+            android:id="@+id/textView_min_temp_text"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:text="Minimum Temperature"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#fdd036"
+            />
+
+        <TextView
+            android:id="@+id/textView_min_temp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout7"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="0dp">
+
+
+        <TextView
+            android:id="@+id/textView_max_temp_text"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:text="Maximum Temperature"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#fdd036"
+            />
+
+        <TextView
+            android:id="@+id/textView_max_temp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout3"
+        android:id="@+id/relativeLayout8"
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:layout_marginTop="0dp">
@@ -151,6 +238,7 @@
             />
 
     </RelativeLayout>
+
 
     <TextView
         android:id="@+id/textView_wind"

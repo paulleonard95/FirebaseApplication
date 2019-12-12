@@ -169,6 +169,9 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
 
             TextView city = (TextView) findViewById(R.id.textView_city);
             TextView temp = (TextView) findViewById(R.id.textView_temperature);
+            TextView feels_like = (TextView) findViewById(R.id.textView_feels_like);
+            TextView min_temp = (TextView) findViewById(R.id.textView_min_temp);
+            TextView max_temp = (TextView) findViewById(R.id.textView_max_temp);
             TextView humidity = (TextView) findViewById(R.id.textView_humidity);
             TextView pressure = (TextView) findViewById(R.id.textView_pressure);
             TextView wind = (TextView) findViewById(R.id.textView_wind);
@@ -181,6 +184,9 @@ public class LocationActivity extends AppCompatActivity implements SensorEventLi
                     JSONObject main = json.getJSONObject("main");
                     city.setText(json.getString("name").toUpperCase(Locale.ENGLISH) + ", " + json.getJSONObject("sys").getString("country"));
                     temp.setText(String.format("%.0f", main.getDouble("temp")) + "°");
+                    feels_like.setText(String.format("%.0f", main.getDouble("feels_like")) + "°" );
+                    min_temp.setText(String.format("%.0f", main.getDouble("temp_min")) + "°" );
+                    max_temp.setText(String.format("%.0f", main.getDouble("temp_max")) + "°" );
                     humidity.setText(String.format("%.0f", main.getDouble("humidity")) + "%");
                     pressure.setText(String.format("%.0f", main.getDouble("pressure")) + "mb");
                     String description = details.getString("description").toUpperCase(Locale.ENGLISH);
