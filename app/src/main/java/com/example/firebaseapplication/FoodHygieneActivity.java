@@ -174,6 +174,10 @@ public class FoodHygieneActivity extends AppCompatActivity {
         startActivity(new Intent(FoodHygieneActivity.this, MainActivity.class));
     }
 
+    public void onClick(View view)
+    {
+        startActivity(new Intent(FoodHygieneActivity.this, MapsActivity.class));
+    }
 
 
 

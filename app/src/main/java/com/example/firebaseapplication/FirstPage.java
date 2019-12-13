@@ -1,9 +1,14 @@
 package com.example.firebaseapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +20,7 @@ import android.widget.TextView;
 public class FirstPage extends AppCompatActivity
 {
 
-    String[] cityArr = {"Derry, GB" , "Belfast, GB","Dublin, IE", "Galway, IE", "Donegal, IE", "London, GB", "Glasgow, GB"};
+    String[] cityArr = {"Derry, GB" , "Liverpool, GB" ,"Belfast, GB","Dublin, IE", "Galway, IE", "Donegal, IE", "London, GB", "Glasgow, GB"};
     String name;
 
     @Override
@@ -37,8 +42,48 @@ public class FirstPage extends AppCompatActivity
 
         textView.setThreshold(3);
         textView.setAdapter(adapter);
+
+        isNetworkConnectionAvailable();
     }
 
+    public void checkNetworkConnection()
+    {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("No Internet Connection");
+        builder.setMessage("Please turn on internet connection");
+        builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                dialogInterface.dismiss();
+                finish();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
+    public  boolean isNetworkConnectionAvailable()
+
+    {
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnected();
+
+        if (isConnected)
+        {
+            Log.d("Network", "Connected");
+            return true;
+        }
+        else
+        {
+            checkNetworkConnection();
+            Log.d("Network", "Not Connected");
+            return false;
+        }
+    }
 
     public void searchByCity(View view) {
 
